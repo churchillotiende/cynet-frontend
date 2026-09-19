@@ -15,34 +15,34 @@ import {
 const values = [
   {
     icon: Medal,
-    title: "Proven Expertise and Experience",
-    text: "With years of experience and a deep understanding of diverse industries, we bring unparalleled insights to every training program that meets each company’s specific needs.",
+    title: "Excellence, Integrity, and Honesty",
+    text: "We uphold the highest standards of professionalism and accountability in every engagement, supporting organizations with ethical, reliable guidance.",
   },
   {
     icon: SlidersHorizontal,
-    title: "Customized Solutions",
-    text: "We don’t believe in one-size-fits-all approaches. Our programs are meticulously designed to meet the unique needs of each client. We prioritize our client's goals, working collaboratively to achieve desired outcomes..",
+    title: "Client-Focused Solutions",
+    text: "Our programs and advisory services are designed with relevance, contextual fit, and measurable impact in mind for each client and sector.",
   },
   {
     icon: ShieldCheck,
-    title: "Certified Trainers",
-    text: "Our team comprises highly qualified professionals with certifications from recognized institutions. They are seasoned professionals with extensive experience in training, capacity building, and research..",
+    title: "Practical Capacity Building",
+    text: "We focus on developing real-world skills, systems, and leadership capabilities that improve performance and sustainable growth.",
   },
   {
     icon: BarChart3,
-    title: "Measurable Results",
-    text: "We focus on outcomes, using data-driven methodologies to ensure tangible improvements in employee performance and organizational productivity..",
+    title: "Evidence-Based Practice",
+    text: "Our work is informed by research, business realities, and measurable results that strengthen decision-making and organizational outcomes.",
   },
   {
     icon: LayoutGrid,
     title: "Diverse Training Portfolio",
-    text: "We offer a wide range of courses that cover essential areas such as Project Management, Data Analysis, Governance, and many more to choose from.",
+    text: "We offer professional training across project management, finance, governance, ICT, monitoring and evaluation, procurement, agriculture, and more.",
   },
 ];
 
 export const Route = createFileRoute("/about")({
   head: () => ({
-    meta: [{ title: "About Us | Bluestron Institute" }],
+    meta: [{ title: "About Us | Cynet East Africa" }],
   }),
   component: About,
 });
@@ -55,62 +55,78 @@ function About() {
         <div className="absolute -right-40 -top-32 size-96 rounded-full bg-primary/30 blur-3xl pointer-events-none" />
         <div className="relative max-w-4xl mx-auto px-5 lg:px-8 py-20 lg:py-28">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">
-            About Us
+            About Cynet East Africa
           </p>
           <h1 className="mt-3 text-4xl lg:text-5xl font-bold leading-tight">
-            Building <span className="text-gradient">capacity</span> across
-            industries since 2020.
+            Empowering organizations to build{" "}
+            <span className="text-gradient">capacity</span> and improve
+            performance.
           </h1>
           <p className="mt-5 text-lg text-muted-foreground max-w-3xl">
-            At Bluestron Solutions Ltd, we believe that learning is the
-            cornerstone of organizational success. Established in 2020, we are a
-            premier provider of corporate training solutions designed to empower
-            businesses, enhance employee performance, and drive sustainable
-            growth. Headquartered in Nairobi, Kenya, we serve clients across
-            East Africa and beyond, delivering transformative learning
-            experiences that align with global best practices. Bluestron is
-            registered in Kenya under the Company Act registration number
-            PVT-9XUGZ293. The company is approved by the National Industrial
-            Training Authority under registration number NITA/
-            TRN/1515/VOL.1[8b].
+            Cynet East Africa Consultancy is a professional training and
+            advisory firm supporting organizations across Africa to build
+            capacity, strengthen systems, and improve performance. We work with
+            public sector institutions, private sector organizations, NGOs, and
+            development partners that require practical skills development and
+            reliable advisory support.
           </p>
           <p className="mt-5 text-lg text-muted-foreground max-w-3xl">
-            Our primary goal is to equip organizations with the
-            skills,knowledge, and tools they need to thrive in an ever-evolving
-            business landscape. Guided by our core values of excellence,
-            innovation, and collaboration, we have helped countless businesses
-            unlock their full potential through tailored training programs. We
-            have a team of 10 permanent trainers and a roster of over 20
-            experienced professionals who are engaged on a needs basis. With a
-            team of certified trainers and industry experts, we are committed to
-            delivering impactful learning solutions that address real-world
-            challenges. Whether you are looking to upskill your workforce,
-            foster leadership, or improve operational efficiency, Bluestron is
-            your trusted partner in growth.
+            Our primary focus is the design and delivery of professional
+            training programs. We offer short courses, executive programs, and
+            customized in-house trainings across a wide range of disciplines
+            including project management, accounting and finance, human
+            resources, lean six sigma and strategy, ICT, customer service,
+            agriculture and environmental management, GIS, child protection,
+            governance and leadership, monitoring and evaluation, data analysis,
+            management and administration, and procurement. All programs are
+            competency-based and aligned to current industry, regulatory, and
+            development sector needs.
+          </p>
+          <p className="mt-5 text-lg text-muted-foreground max-w-3xl">
+            In addition to training, we provide team building services,
+            research, business strategy development, and tax and financial
+            advisory services. These offerings support organizations to improve
+            internal alignment, strengthen decision-making, enhance compliance,
+            and achieve sustainable growth.
           </p>
         </div>
       </section>
 
       <section className="max-w-7xl mx-auto px-5 lg:px-8 py-16 lg:py-24 grid lg:grid-cols-2 gap-10 items-start">
         <div>
-          <h2 className="text-2xl lg:text-3xl font-bold">Our mission</h2>
+          <h2 className="text-2xl lg:text-3xl font-bold">Our Mission</h2>
           <p className="mt-4 text-muted-foreground leading-relaxed">
-            Deliver high-quality, reliable, and timely supply solutions that
-            empower organizations to operate efficiently and focus on their core
-            objectives
+            To deliver cost-effective and best-fit consulting services in
+            research, business transformation, and improvement.
           </p>
+
           <h2 className="text-2xl lg:text-3xl font-bold mt-10">Our Vision</h2>
           <p className="mt-4 text-muted-foreground leading-relaxed">
-            To be the leading provider of timely and reliable supplies, enabling
-            organizations to focus on their core business by ensuring seamless
-            access to the resources they need.
+            To be a leading consultancy firm in research, training, and employee
+            development.
           </p>
+
+          <h2 className="text-2xl lg:text-3xl font-bold mt-10">
+            Our Delivery Approach
+          </h2>
+          <p className="mt-4 text-muted-foreground leading-relaxed">
+            Our delivery approach is practical and client-focused. Services are
+            offered through in-person, virtual, and blended formats, both
+            locally and internationally. We work closely with our clients to
+            ensure relevance, contextual fit, and measurable outcomes from every
+            engagement.
+          </p>
+
           <h2 className="text-2xl lg:text-3xl font-bold mt-10">What we do</h2>
           <ul className="mt-4 space-y-2.5 text-muted-foreground">
-            <li>• 300+ training programs across 17+ specializations</li>
-            <li>• Tailored in-house corporate training</li>
-            <li>• Strategic consultancy and advisory services</li>
-            <li>• Applied research and evaluation studies</li>
+            <li>• Short courses, executive programs, and in-house training</li>
+            <li>
+              • Business strategy and organizational transformation support
+            </li>
+            <li>• Team building, research, and advisory services</li>
+            <li>
+              • Tax, finance, governance, and performance improvement consulting
+            </li>
           </ul>
         </div>
         <div className="grid sm:grid-cols-2 gap-4">

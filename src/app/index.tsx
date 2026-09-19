@@ -12,14 +12,14 @@ export const Route = createFileRoute("/")({
       const hero = await api.getHeroSection();
 
       const title = hero?.headline
-        ? `${hero.headline} ${hero.headline_highlight ?? ""} ${hero.second_headline ?? ""} | Bluestron Institute`
+        ? `${hero.headline} ${hero.headline_highlight ?? ""} ${hero.second_headline ?? ""} | Cynet East Africa`
             .replace(/\s+/g, " ")
             .trim()
-        : "Bluestron Institute — Igniting Careers with Elite Training & Strategic Insights";
+        : "Cynet East Africa — Empowering Professionals Through Expert Training & Consultancy";
 
       const description =
         hero?.subheadline ||
-        "Corporate training trusted by 35+ organisations across Africa.";
+        "At Cynet East Africa, we specialize in providing high-impact training, research, and consultancy services to individuals and organizations across various industries.";
 
       return {
         meta: [

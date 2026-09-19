@@ -9,64 +9,24 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './app/__root'
-import { Route as IndexRouteImport } from './app/index'
-import { Route as AccreditationRouteImport } from './app/Accreditation'
-import { Route as CalendarRouteImport } from './app/Calendar'
-import { Route as ContactRouteImport } from './app/Contact'
-import { Route as CoursesRouteImport } from './app/Courses'
-import { Route as AboutRouteImport } from './app/about'
-import { Route as OurClientsRouteImport } from './app/our-clients'
-import { Route as OurGalleryRouteImport } from './app/our-gallery'
-import { Route as PrivacyPolicyRouteImport } from './app/privacy-policy'
-import { Route as TermsAndConditionsRouteImport } from './app/terms-and-conditions'
 import { Route as TestRouteImport } from './app/test'
-import { Route as CategorySlugRouteImport } from './app/category.$slug'
+import { Route as TermsAndConditionsRouteImport } from './app/terms-and-conditions'
+import { Route as PrivacyPolicyRouteImport } from './app/privacy-policy'
+import { Route as OurGalleryRouteImport } from './app/our-gallery'
+import { Route as OurClientsRouteImport } from './app/our-clients'
+import { Route as AboutRouteImport } from './app/about'
+import { Route as CoursesRouteImport } from './app/Courses'
+import { Route as ContactRouteImport } from './app/Contact'
+import { Route as CalendarRouteImport } from './app/Calendar'
+import { Route as AccreditationRouteImport } from './app/Accreditation'
+import { Route as IndexRouteImport } from './app/index'
 import { Route as CourseSlugRouteImport } from './app/course.$slug'
+import { Route as CategorySlugRouteImport } from './app/category.$slug'
 import { Route as CourseRegistrationSlugRegisterRouteImport } from './app/course-registration.$slug.register'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AccreditationRoute = AccreditationRouteImport.update({
-  id: '/Accreditation',
-  path: '/Accreditation',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CalendarRoute = CalendarRouteImport.update({
-  id: '/Calendar',
-  path: '/Calendar',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/Contact',
-  path: '/Contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CoursesRoute = CoursesRouteImport.update({
-  id: '/Courses',
-  path: '/Courses',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OurClientsRoute = OurClientsRouteImport.update({
-  id: '/our-clients',
-  path: '/our-clients',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OurGalleryRoute = OurGalleryRouteImport.update({
-  id: '/our-gallery',
-  path: '/our-gallery',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
-  id: '/privacy-policy',
-  path: '/privacy-policy',
+const TestRoute = TestRouteImport.update({
+  id: '/test',
+  path: '/test',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
@@ -74,19 +34,59 @@ const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
   path: '/terms-and-conditions',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TestRoute = TestRouteImport.update({
-  id: '/test',
-  path: '/test',
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CategorySlugRoute = CategorySlugRouteImport.update({
-  id: '/category/$slug',
-  path: '/category/$slug',
+const OurGalleryRoute = OurGalleryRouteImport.update({
+  id: '/our-gallery',
+  path: '/our-gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OurClientsRoute = OurClientsRouteImport.update({
+  id: '/our-clients',
+  path: '/our-clients',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesRoute = CoursesRouteImport.update({
+  id: '/Courses',
+  path: '/Courses',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/Contact',
+  path: '/Contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalendarRoute = CalendarRouteImport.update({
+  id: '/Calendar',
+  path: '/Calendar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccreditationRoute = AccreditationRouteImport.update({
+  id: '/Accreditation',
+  path: '/Accreditation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CourseSlugRoute = CourseSlugRouteImport.update({
   id: '/course/$slug',
   path: '/course/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategorySlugRoute = CategorySlugRouteImport.update({
+  id: '/category/$slug',
+  path: '/category/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CourseRegistrationSlugRegisterRoute =
@@ -215,67 +215,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/Accreditation': {
-      id: '/Accreditation'
-      path: '/Accreditation'
-      fullPath: '/Accreditation'
-      preLoaderRoute: typeof AccreditationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/Calendar': {
-      id: '/Calendar'
-      path: '/Calendar'
-      fullPath: '/Calendar'
-      preLoaderRoute: typeof CalendarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/Contact': {
-      id: '/Contact'
-      path: '/Contact'
-      fullPath: '/Contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/Courses': {
-      id: '/Courses'
-      path: '/Courses'
-      fullPath: '/Courses'
-      preLoaderRoute: typeof CoursesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/our-clients': {
-      id: '/our-clients'
-      path: '/our-clients'
-      fullPath: '/our-clients'
-      preLoaderRoute: typeof OurClientsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/our-gallery': {
-      id: '/our-gallery'
-      path: '/our-gallery'
-      fullPath: '/our-gallery'
-      preLoaderRoute: typeof OurGalleryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy-policy': {
-      id: '/privacy-policy'
-      path: '/privacy-policy'
-      fullPath: '/privacy-policy'
-      preLoaderRoute: typeof PrivacyPolicyRouteImport
+    '/test': {
+      id: '/test'
+      path: '/test'
+      fullPath: '/test'
+      preLoaderRoute: typeof TestRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms-and-conditions': {
@@ -285,18 +229,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsAndConditionsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/test': {
-      id: '/test'
-      path: '/test'
-      fullPath: '/test'
-      preLoaderRoute: typeof TestRouteImport
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/category/$slug': {
-      id: '/category/$slug'
-      path: '/category/$slug'
-      fullPath: '/category/$slug'
-      preLoaderRoute: typeof CategorySlugRouteImport
+    '/our-gallery': {
+      id: '/our-gallery'
+      path: '/our-gallery'
+      fullPath: '/our-gallery'
+      preLoaderRoute: typeof OurGalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/our-clients': {
+      id: '/our-clients'
+      path: '/our-clients'
+      fullPath: '/our-clients'
+      preLoaderRoute: typeof OurClientsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/Courses': {
+      id: '/Courses'
+      path: '/Courses'
+      fullPath: '/Courses'
+      preLoaderRoute: typeof CoursesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/Contact': {
+      id: '/Contact'
+      path: '/Contact'
+      fullPath: '/Contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/Calendar': {
+      id: '/Calendar'
+      path: '/Calendar'
+      fullPath: '/Calendar'
+      preLoaderRoute: typeof CalendarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/Accreditation': {
+      id: '/Accreditation'
+      path: '/Accreditation'
+      fullPath: '/Accreditation'
+      preLoaderRoute: typeof AccreditationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/course/$slug': {
@@ -304,6 +297,13 @@ declare module '@tanstack/react-router' {
       path: '/course/$slug'
       fullPath: '/course/$slug'
       preLoaderRoute: typeof CourseSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/category/$slug': {
+      id: '/category/$slug'
+      path: '/category/$slug'
+      fullPath: '/category/$slug'
+      preLoaderRoute: typeof CategorySlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/course-registration/$slug/register': {

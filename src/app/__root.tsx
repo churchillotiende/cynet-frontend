@@ -77,7 +77,7 @@ export const Route = createRootRoute({
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap",
       },
     ],
     scripts: [{ src: "https://elfsightcdn.com/platform.js", async: true }],
@@ -108,7 +108,7 @@ function RootLayout() {
                 avatar="assets/bluestroninstitute-primary-logo.png"
                 statusMessage="Typically replies within 1 hour"
                 chatMessage="Hello! 👋 How can we help you today?"
-                darkMode={true}
+                darkMode={false}
                 allowClickAway={true}
                 allowEsc={true}
                 notification={true}

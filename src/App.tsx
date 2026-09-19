@@ -35,7 +35,7 @@ const App = () => (
           avatar="assets/bluestroninstitute-primary-logo.png"
           statusMessage="Typically replies within 1 hour"
           chatMessage="Hello! 👋 How can we help you today?"
-          darkMode={true}
+          darkMode={false}
           allowClickAway={true}
           allowEsc={true}
           notification={true}

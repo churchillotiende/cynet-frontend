@@ -6,19 +6,25 @@ const Ctx = createContext<{ theme: Theme; toggleTheme: () => void } | null>(
   null,
 );
 
-const KEY = "bluestron-theme";
+const KEY = "cynet-east-africa-theme";
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     try {
-      return (localStorage.getItem(KEY) as Theme | null) ?? "dark";
+      const savedTheme = localStorage.getItem(KEY);
+      if (savedTheme === "dark") {
+        localStorage.setItem(KEY, "light");
+      }
+      return "light";
     } catch {
-      return "dark";
+      return "light";
     }
   });
 
   useEffect(() => {
     document.documentElement.classList.toggle("light", theme === "light");
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    document.documentElement.style.colorScheme = theme;
     try {
       localStorage.setItem(KEY, theme);
     } catch (error) {

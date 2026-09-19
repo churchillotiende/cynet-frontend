@@ -1,90 +1,109 @@
 import { Mail, MapPin, Phone, Users, MessageCircle } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
-const nav = [
-  { to: "/", label: "Home", end: true },
-  { to: "/courses", label: "Courses" },
-  {
-    to: "https://drive.google.com/file/d/1TqaD4jHUqqFSqMgV5zePqF-uGg9rm4AE/view",
-    label: "Calendar",
-  },
-  { to: "/about", label: "About" },
-  { to: "/contact", label: "Contact" },
-  { to: "/our-gallery", label: "Gallery" },
+const quickLinks = [
+  { to: "/about", label: "About Us" },
   { to: "/our-clients", label: "Our Clients" },
-  { to: "/sitemap.xml", label: "Sitemap" },
+  { to: "/portfolio", label: "Portfolio" },
+  {
+    to: "https://cyneteastafrica.com/training-calendar-2026/",
+    label: "Training Calendar",
+  },
+  { to: "/contact", label: "Contact Us" },
+];
+
+const categories = [
+  { to: "/courses", label: "Project Management Training" },
+  { to: "/courses", label: "Strategy and Lean Six Sigma Training" },
+  { to: "/courses", label: "Climate Change and Agriculture Training" },
+  { to: "/courses", label: "Governance and Leadership" },
 ];
 
 export function Footer() {
   return (
     <>
-      {/* Google reviews */}
-      <section className="hidden max-w-7xl mx-auto px-5 lg:px-8 py-16 lg:py-20">
-        <div
-          className="elfsight-app-1b1829b4-b00b-4885-97d1-83742fd255ee"
-          data-elfsight-app-lazy
-        ></div>
-      </section>
-      {/* CTA */}
       <section className="bg-hero">
         <div className="max-w-7xl mx-auto px-5 lg:px-8 py-12 lg:py-16">
-          <div className="relative overflow-hidden">
-            <div className="relative grid lg:grid-cols-[1fr_auto] gap-8 items-center">
-              <div>
-                <h2 className="text-3xl lg:text-4xl font-bold leading-tight">
-                  Tell us what your{" "}
-                  <span className="text-gradient">team needs</span>
-                </h2>
-                <p className="mt-3 text-muted-foreground max-w-xl">
-                  We reply within one business day{" "}
-                </p>
-              </div>
-              <div className="flex gap-3">
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-2 px-5 h-12 rounded-lg bg-gradient-primary text-primary-foreground font-medium shadow-glow"
-                >
-                  <Users className="size-4" />
-                  Talk to an advisor
-                </Link>
-                <a
-                  href="https://wa.me/+254715113519"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 h-12 rounded-lg bg-[#25D366] hover:bg-[#20BD5A] border border-[#25D366] font-medium text-white"
-                >
-                  <MessageCircle className="size-4" />
-                  WhatsApp
-                </a>{" "}
-              </div>
+          <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr_1fr_1fr_1fr] items-center">
+            <div className="lg:col-span-2">
+              <a
+                href="https://cyneteastafrica.com/courses/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 h-12 rounded-lg bg-gradient-primary text-primary-foreground font-medium shadow-glow"
+              >
+                Start Learning, Choose a course
+              </a>
+            </div>
+
+            <div className="flex items-center gap-3 text-sm text-muted-foreground">
+              <Link
+                to="/about"
+                className="font-medium text-foreground hover:text-primary"
+              >
+                Our Mission
+              </Link>
+            </div>
+
+            <div className="flex items-center gap-3 text-sm text-muted-foreground">
+              <Link
+                to="/about"
+                className="font-medium text-foreground hover:text-primary"
+              >
+                Our Vision
+              </Link>
+            </div>
+
+            <div className="flex items-center gap-3 text-sm text-muted-foreground">
+              <Link
+                to="/about"
+                className="font-medium text-foreground hover:text-primary"
+              >
+                Our Values
+              </Link>
+            </div>
+
+            <div className="flex items-center gap-3 text-sm text-muted-foreground">
+              <Link
+                to="/about"
+                className="font-medium text-foreground hover:text-primary"
+              >
+                Our Journey
+              </Link>
             </div>
           </div>
         </div>
-      </section>{" "}
+      </section>
+
       <footer className="border-t border-border bg-card">
-        <div className="max-w-7xl mx-auto px-5 lg:px-8 py-12 grid md:grid-cols-4 gap-8">
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-2.5">
-              <Link to="/" className="flex items-center gap-3">
-                <img
-                  src="/assets/bluestroninstitute-primary-logo.png"
-                  alt="Bluestron Logo"
-                  className="h-[150px] w-auto object-contain"
-                />
-              </Link>
+        <div className="max-w-7xl mx-auto px-5 lg:px-8 py-12 grid gap-10 md:grid-cols-2 lg:grid-cols-[1.5fr_0.9fr_0.9fr_1.2fr]">
+          <div>
+            <div className="flex items-center gap-3">
+              <div className="rounded-xl bg-primary/10 text-primary border border-primary/20 px-3 py-2 text-sm font-semibold tracking-[0.18em] uppercase">
+                Cynet
+              </div>
+              <div>
+                <div className="text-lg font-bold leading-none">
+                  East Africa
+                </div>
+              </div>
             </div>
-            <h3 className="mt-4 text-xl text-muted-foreground max-w-md">
-              Corporate training trusted by 35+ organisations across Africa
-            </h3>
-            <p className="mt-4 text-sm text-muted-foreground max-w-md">
-              NITA-approved courses delivered in Nairobi, online, or in-house at
-              your offices. 1,000+ professionals trained since 2020.{" "}
+
+            <p className="mt-5 text-sm uppercase tracking-[0.2em] text-primary font-semibold">
+              Professional Training Excellence
+            </p>
+            <p className="mt-4 max-w-md text-sm text-muted-foreground leading-6">
+              Leading international professional training service provider
+              specializing in training, consultancy, and research services
+              across East Africa.
+            </p>
+            <p className="mt-5 text-sm font-medium text-foreground">
+              NITA APPROVED
             </p>
 
-            {/* Social handles */}
             <div className="mt-6 flex items-center gap-3">
               <a
-                href="https://www.facebook.com/bluestron/"
+                href="https://web.facebook.com/cyneteastafricaconsultancy/?_rdc=1&_rdr"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -95,7 +114,7 @@ export function Footer() {
                 </svg>
               </a>
               <a
-                href="https://x.com/bluestronsoluti"
+                href="https://x.com/CynetA"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="X (Twitter)"
@@ -106,7 +125,7 @@ export function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.linkedin.com/company/bluestroninstitute/?originalSubdomain=ke"
+                href="https://ke.linkedin.com/company/cynet-east-africa"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -117,18 +136,7 @@ export function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.instagram.com/bluestronsolutions/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="flex items-center justify-center w-9 h-9 rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary transition-colors"
-              >
-                <svg className="size-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-                </svg>
-              </a>
-              <a
-                href="https://www.youtube.com/@bluestronsolutions6488/null"
+                href="https://www.youtube.com/@cyneteastafricaconsultancy6360"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="YouTube"
@@ -142,12 +150,48 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-sm font-semibold mb-3">Explore</p>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              {nav.map((n) => (
-                <li key={n.to}>
-                  <Link to={n.to} className="hover:text-primary">
-                    {n.label}
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-foreground mb-4">
+              Quick Links
+            </p>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              {quickLinks.map((item) =>
+                item.to.startsWith("http") ? (
+                  <li key={item.label}>
+                    <a
+                      href={item.to}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="hover:text-primary transition-colors"
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ) : (
+                  <li key={item.label}>
+                    <Link
+                      to={item.to}
+                      className="hover:text-primary transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ),
+              )}
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-foreground mb-4">
+              Training Categories
+            </p>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              {categories.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    to={item.to}
+                    className="hover:text-primary transition-colors"
+                  >
+                    {item.label}
                   </Link>
                 </li>
               ))}
@@ -155,46 +199,77 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-sm font-semibold mb-3">Contact</p>
-            <ul className="space-y-2.5 text-sm text-muted-foreground">
-              <li className="flex items-start gap-2">
-                <MapPin className="size-4 mt-0.5 text-primary" /> View Park
-                Towers, Nairobi, Kenya
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-foreground mb-4">
+              Get In Touch
+            </p>
+
+            <ul className="space-y-4 text-sm text-muted-foreground">
+              <li className="flex items-start gap-3">
+                <MapPin className="size-4 mt-0.5 text-primary" />
+                <span>View Park Towers, Nairobi, Kenya</span>
               </li>
-              <li className="flex items-start gap-2">
-                <Mail className="size-4 mt-0.5 text-primary" />{" "}
-                info@bluestroninstitute.com
+              <li className="flex items-start gap-3">
+                <Phone className="size-4 mt-0.5 text-primary" />
+                <a
+                  href="tel:+254792972525"
+                  className="hover:text-primary transition-colors"
+                >
+                  +254 792 972 525
+                </a>
               </li>
-              <li className="flex items-start gap-2">
-                <Phone className="size-4 mt-0.5 text-primary" /> +254 715 113
-                519
+              <li className="flex items-start gap-3">
+                <Mail className="size-4 mt-0.5 text-primary" />
+                <a
+                  href="mailto:info@cyneteastafrica.com"
+                  className="hover:text-primary transition-colors"
+                >
+                  info@cyneteastafrica.com
+                </a>
               </li>
             </ul>
+
+            <div className="mt-6 flex items-center gap-3">
+              <input
+                type="email"
+                placeholder="Your email"
+                className="h-11 flex-1 rounded-lg border border-border bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground outline-none ring-0 focus:border-primary"
+              />
+              <button className="inline-flex h-11 items-center justify-center rounded-lg bg-gradient-primary px-4 text-sm font-medium text-primary-foreground shadow-glow">
+                Subscribe
+              </button>
+            </div>
           </div>
         </div>
 
-        <div className="border-t border-border">
-          <div className="max-w-7xl mx-auto px-5 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground">
+        <div className="border-t border-border bg-background/50">
+          <div className="max-w-7xl mx-auto px-5 lg:px-8 py-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between text-xs text-muted-foreground">
             <p>
-              © {new Date().getFullYear()} Bluestron Institute. All rights
+              © {new Date().getFullYear()} Cynet East Africa. All rights
               reserved.
             </p>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center gap-3">
               <Link
                 to="/privacy-policy"
                 className="hover:text-primary transition-colors"
               >
                 Privacy Policy
               </Link>
-              <span className="opacity-40">·</span>
+              <span>·</span>
               <Link
                 to="/terms-and-conditions"
                 className="hover:text-primary transition-colors"
               >
-                Terms & Conditions
+                Terms of Service
               </Link>
-              <span className="opacity-40">·</span>
-              <p>Content powered by Bluestron Digital Team.</p>
+              <span>·</span>
+              <a
+                href="https://cyneteastafrica.com/cookies"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-primary transition-colors"
+              >
+                Cookies
+              </a>
             </div>
           </div>
         </div>

@@ -5,10 +5,10 @@ import { useHeroSection } from "@/hooks/use-homepage";
 
 function HeroSection() {
   const stats = [
-    { value: "1,000+", label: "Professionals Trained" },
+    { value: "5000+", label: "Professionals Trained" },
     { value: "300+", label: "Training Programs" },
-    { value: "15+", label: "Industries Served" },
-    { value: "5+", label: "Years of Excellence" },
+    { value: "25+", label: "Industries Served" },
+    { value: "11+", label: "Years of Experience" },
   ];
 
   const { data: hero, isLoading } = useHeroSection();
@@ -54,7 +54,8 @@ function HeroSection() {
           <div className="h-6 w-40 rounded-full bg-muted animate-pulse" />
         ) : (
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/15 border border-primary/30 text-primary text-xs font-medium">
-            <Sparkles className="size-3" /> {hero?.badge_text}
+            <Sparkles className="size-3" />{" "}
+            {hero?.badge_text ?? "Professional Training Excellence"}
           </span>
         )}
         {isLoading ? (
@@ -64,10 +65,8 @@ function HeroSection() {
           </div>
         ) : (
           <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] max-w-4xl">
-            {hero?.headline}{" "}
-            <span className="text-gradient">{hero?.headline_highlight} </span>
-            <br className="hidden sm:block" />
-            {hero?.second_headline}{" "}
+            {hero?.headline ??
+              "Empowering Professionals Through Expert Training & Consultancy"}
           </h1>
         )}
         {isLoading ? (
@@ -77,7 +76,8 @@ function HeroSection() {
           </div>
         ) : (
           <p className="mt-6 text-base lg:text-lg text-muted-foreground max-w-2xl">
-            {hero?.subheadline}{" "}
+            {hero?.subheadline ??
+              "At Cynet East Africa, we specialize in providing high-impact training, research, and consultancy services to individuals and organizations across various industries."}
           </p>
         )}
         {isLoading ? (
@@ -88,11 +88,11 @@ function HeroSection() {
         ) : (
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              to={hero?.cta_url}
+              to={hero?.cta_url ?? "/courses"}
               className="inline-flex items-center gap-2 px-5 h-12 rounded-lg bg-gradient-primary text-primary-foreground font-medium shadow-glow hover:opacity-95 transition"
             >
               <BookOpen className="size-4" />
-              {hero?.cta_label}
+              {hero?.cta_label ?? "View Courses"}
             </Link>
             <Link
               to="https://drive.google.com/file/d/1TqaD4jHUqqFSqMgV5zePqF-uGg9rm4AE/view"
