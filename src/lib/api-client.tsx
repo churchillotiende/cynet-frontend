@@ -137,7 +137,10 @@ export interface HeroSection {
 
 const stripHtml = (value?: string) =>
   value
-    ? value.replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " ").trim()
+    ? value
+        .replace(/<[^>]*>/g, "")
+        .replace(/&nbsp;/g, " ")
+        .trim()
     : "";
 
 const mapCourse = (item: WPCourseItem): Course => {
@@ -161,7 +164,8 @@ const mapCourse = (item: WPCourseItem): Course => {
     }));
 
   const excerpt = item.excerpt?.rendered ?? "";
-  const description = stripHtml(excerpt) || stripHtml(item.content?.rendered ?? "");
+  const description =
+    stripHtml(excerpt) || stripHtml(item.content?.rendered ?? "");
 
   return {
     id: item.id,
@@ -202,10 +206,13 @@ async function get<T>(
   ) as Record<string, string | number | boolean>;
 
   const query = new URLSearchParams(
-    Object.entries(cleaned).reduce<Record<string, string>>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {}),
+    Object.entries(cleaned).reduce<Record<string, string>>(
+      (acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      },
+      {},
+    ),
   ).toString();
 
   const url = query ? `${WP_BASE}${path}?${query}` : `${WP_BASE}${path}`;
@@ -228,10 +235,13 @@ async function getWithTotal<T>(
   ) as Record<string, string | number | boolean>;
 
   const query = new URLSearchParams(
-    Object.entries(cleaned).reduce<Record<string, string>>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {}),
+    Object.entries(cleaned).reduce<Record<string, string>>(
+      (acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      },
+      {},
+    ),
   ).toString();
 
   const url = query ? `${WP_BASE}${path}?${query}` : `${WP_BASE}${path}`;
@@ -298,12 +308,14 @@ export const api = {
       : null;
   },
 
-  listPaginatedCourses: async (params: {
-    page?: number;
-    search?: string;
-    category?: number;
-    per_page?: number;
-  } = {}) => {
+  listPaginatedCourses: async (
+    params: {
+      page?: number;
+      search?: string;
+      category?: number;
+      per_page?: number;
+    } = {},
+  ) => {
     const { data, total, totalPages } = await getWithTotal<WPCourseItem[]>(
       "/lp_course",
       {
