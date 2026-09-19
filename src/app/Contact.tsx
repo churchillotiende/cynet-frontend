@@ -19,7 +19,7 @@ function Contact() {
 
     const form = e.target as HTMLFormElement;
     const data = new FormData(form);
-    const WP_BASE = "https://api.bluestroninstitute.com/wp-json";
+    const WP_BASE = "https://cyneteastafrica.com/wp-json";
 
     try {
       const res = await fetch(`${WP_BASE}/tcr/v1/contact`, {

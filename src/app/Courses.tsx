@@ -168,12 +168,12 @@ function Courses() {
                 <p>
                   Showing {courses.data.data.length} of{" "}
                   <span className="text-foreground font-medium">
-                    {courses.data.total}
+                    {courses.data.total ?? courses.data.meta.total}
                   </span>{" "}
                   programs
                 </p>
                 <p>
-                  Page {page} / {courses.data.last_page}
+                  Page {page} / {courses.data.last_page ?? courses.data.meta.last_page}
                 </p>
               </div>
 
@@ -192,10 +192,10 @@ function Courses() {
                   <ChevronLeft className="size-4" /> Prev
                 </button>
                 <span className="px-4 text-sm text-muted-foreground">
-                  Page {page} of {courses.data.last_page}
+                  Page {page} of {courses.data.last_page ?? courses.data.meta.last_page}
                 </span>
                 <button
-                  disabled={page >= courses.data.last_page}
+                  disabled={page >= (courses.data.last_page ?? courses.data.meta.last_page)}
                   onClick={() => setParam("page", page + 1)}
                   className="inline-flex items-center gap-1 px-4 h-10 rounded-lg bg-secondary border border-border text-sm disabled:opacity-40 hover:bg-muted transition"
                 >

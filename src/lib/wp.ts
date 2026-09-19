@@ -1,5 +1,5 @@
-// WordPress REST API client for bluestroninstitute.com
-const WP_BASE = "https://api.bluestroninstitute.com/wp-json/wp/v2";
+// WordPress REST API client for https://cyneteastafrica.com
+const WP_BASE = "https://cyneteastafrica.com/wp-json/wp/v2";
 
 export interface WPRendered {
   rendered: string;

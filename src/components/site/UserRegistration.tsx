@@ -85,7 +85,7 @@ export function useRegistration(): RegistrationState {
 /* ------------------------------------------------------------------ */
 /* Submit — posts to your plugin's existing AJAX action                */
 /* ------------------------------------------------------------------ */
-const WP_BASE = "https://api.bluestroninstitute.com/wp-json";
+const WP_BASE = "https://cyneteastafrica.com/wp-json";
 
 async function submitRegistration(
   formData: FormData,

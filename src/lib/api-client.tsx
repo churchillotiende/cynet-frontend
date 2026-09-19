@@ -1,6 +1,56 @@
 import HeroSection from "@/components/site/HeroSection";
 
-const API_BASE = "https://api-v2.bluestroninstitute.com/api/v1";
+const WP_BASE = "https://cyneteastafrica.com/wp-json/wp/v2";
+
+interface WPEmbeddedMedia {
+  source_url?: string;
+  alt_text?: string;
+  media_details?: {
+    sizes?: Record<string, { source_url?: string }>;
+  };
+}
+
+interface WPEmbeddedTerm {
+  id: number;
+  name: string;
+  slug: string;
+  taxonomy?: string;
+  count?: number;
+  description?: string;
+}
+
+interface WPCourseItem {
+  id: number;
+  slug: string;
+  date: string;
+  link: string;
+  title: { rendered: string };
+  excerpt?: { rendered: string };
+  content?: { rendered: string };
+  featured_media?: number;
+  course_category?: number[];
+  _embedded?: {
+    "wp:featuredmedia"?: WPEmbeddedMedia[];
+    "wp:term"?: WPEmbeddedTerm[][];
+  };
+}
+
+interface WPCategoryItem {
+  id: number;
+  name: string;
+  slug: string;
+  count?: number;
+  description?: string;
+}
+
+interface WPPageItem {
+  id: number;
+  slug: string;
+  title: { rendered: string };
+  content: { rendered: string };
+  date: string;
+  link: string;
+}
 
 export interface Course {
   id: number;
@@ -51,6 +101,10 @@ export interface Faq {
 
 export interface PaginatedCourses {
   data: Course[];
+  current_page: number;
+  last_page: number;
+  per_page: number;
+  total: number;
   meta: {
     current_page: number;
     last_page: number;
@@ -81,84 +135,241 @@ export interface HeroSection {
   is_active: boolean;
 }
 
+const stripHtml = (value?: string) =>
+  value
+    ? value.replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " ").trim()
+    : "";
+
+const mapCourse = (item: WPCourseItem): Course => {
+  const media = item._embedded?.["wp:featuredmedia"]?.[0];
+  const featured_image =
+    media?.media_details?.sizes?.large?.source_url ??
+    media?.media_details?.sizes?.medium_large?.source_url ??
+    media?.media_details?.sizes?.medium?.source_url ??
+    media?.source_url ??
+    null;
+
+  const categories = (item._embedded?.["wp:term"] ?? [])
+    .flat()
+    .filter((term) => term.taxonomy === "course_category")
+    .map((term) => ({
+      id: term.id,
+      name: term.name,
+      slug: term.slug,
+      description: term.description,
+      courses_count: term.count,
+    }));
+
+  const excerpt = item.excerpt?.rendered ?? "";
+  const description = stripHtml(excerpt) || stripHtml(item.content?.rendered ?? "");
+
+  return {
+    id: item.id,
+    slug: item.slug,
+    title: item.title.rendered,
+    excerpt,
+    content: item.content?.rendered,
+    featured_image: featured_image,
+    price: 0,
+    duration: null,
+    categories,
+    published_at: item.date,
+    seo_title: item.title.rendered,
+    seo_description: description || null,
+    seo_canonical: item.link,
+    seo_robots_noindex: false,
+    og_title: item.title.rendered,
+    og_description: description || null,
+  };
+};
+
+const mapCategory = (item: WPCategoryItem): Category => ({
+  id: item.id,
+  name: item.name,
+  slug: item.slug,
+  description: item.description,
+  courses_count: item.count,
+});
+
 async function get<T>(
   path: string,
-  params: Record<string, string | number | undefined> = {},
+  params: Record<string, string | number | boolean | undefined> = {},
 ): Promise<T> {
   const cleaned = Object.fromEntries(
     Object.entries(params).filter(
       ([, v]) => v !== undefined && v !== null && v !== "",
     ),
-  ) as Record<string, string | number>;
+  ) as Record<string, string | number | boolean>;
 
   const query = new URLSearchParams(
-    cleaned as Record<string, string>,
+    Object.entries(cleaned).reduce<Record<string, string>>((acc, [key, value]) => {
+      acc[key] = String(value);
+      return acc;
+    }, {}),
   ).toString();
 
-  const url = query ? `${API_BASE}${path}?${query}` : `${API_BASE}${path}`;
+  const url = query ? `${WP_BASE}${path}?${query}` : `${WP_BASE}${path}`;
 
-  const res = await fetch(url);
+  const res = await fetch(url, { headers: { Accept: "application/json" } });
   if (!res.ok) {
     throw new Error(`API request failed: ${res.status} ${path}`);
   }
   return res.json();
 }
 
-async function post<T>(path: string, body: unknown): Promise<T> {
-  const res = await fetch(`${API_BASE}${path}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
+async function getWithTotal<T>(
+  path: string,
+  params: Record<string, string | number | boolean | undefined> = {},
+): Promise<{ data: T; total: number; totalPages: number }> {
+  const cleaned = Object.fromEntries(
+    Object.entries(params).filter(
+      ([, v]) => v !== undefined && v !== null && v !== "",
+    ),
+  ) as Record<string, string | number | boolean>;
+
+  const query = new URLSearchParams(
+    Object.entries(cleaned).reduce<Record<string, string>>((acc, [key, value]) => {
+      acc[key] = String(value);
+      return acc;
+    }, {}),
+  ).toString();
+
+  const url = query ? `${WP_BASE}${path}?${query}` : `${WP_BASE}${path}`;
+
+  const res = await fetch(url, { headers: { Accept: "application/json" } });
   if (!res.ok) {
-    const json = await res.json().catch(() => null);
-    throw new Error(
-      json?.message ?? `API request failed: ${res.status} ${path}`,
-    );
+    throw new Error(`API request failed: ${res.status} ${path}`);
   }
-  return res.json();
+
+  const data = (await res.json()) as T;
+  return {
+    data,
+    total: Number(res.headers.get("X-WP-Total") ?? "0"),
+    totalPages: Number(res.headers.get("X-WP-TotalPages") ?? "0"),
+  };
 }
 
 export const api = {
-  listCourses: (
+  listCourses: async (
     params: { page?: number; search?: string; category?: number } = {},
-  ) =>
-    get<{ data: Course[] }>(
-      "/courses",
-      params as Record<string, string | number>,
-    ).then((r) => r.data),
+  ) => {
+    const items = await get<WPCourseItem[]>("/lp_course", {
+      page: params.page ?? 1,
+      per_page: 12,
+      search: params.search,
+      course_category: params.category,
+      orderby: "date",
+      order: "desc",
+      _embed: "wp:featuredmedia,wp:term",
+    });
+    return items.map(mapCourse);
+  },
 
-  getCourse: (slug: string) => get<{ data: Course }>(`/courses/${slug}`),
+  getCourse: async (slug: string) => {
+    const items = await get<WPCourseItem[]>("/lp_course", {
+      slug,
+      _embed: "wp:featuredmedia,wp:term",
+    });
+    return items[0] ? mapCourse(items[0]) : null;
+  },
 
   getHeroSection: () => get<HeroSection>("/hero-section"),
 
-  listCategories: () => get<Category[]>("/categories"),
+  listCategories: async () => {
+    const items = await get<WPCategoryItem[]>("/course_category", {
+      per_page: 50,
+      hide_empty: true,
+      orderby: "count",
+      order: "desc",
+    });
+    return items.map(mapCategory);
+  },
 
-  getPage: (slug: string) =>
-    get<{ data: Page }>(`/pages/${slug}`).then((r) => r.data),
+  getPage: async (slug: string) => {
+    const items = await get<WPPageItem[]>("/pages", { slug });
+    const page = items[0];
+    return page
+      ? {
+          id: page.id,
+          slug: page.slug,
+          title: page.title.rendered,
+          content: page.content.rendered,
+        }
+      : null;
+  },
 
-  listPaginatedCourses: (
-    params: {
-      page?: number;
-      search?: string;
-      category?: number;
-      per_page?: number;
-    } = {},
-  ) =>
-    get<PaginatedCourses>(
-      "/courses",
-      params as Record<string, string | number>,
-    ),
+  listPaginatedCourses: async (params: {
+    page?: number;
+    search?: string;
+    category?: number;
+    per_page?: number;
+  } = {}) => {
+    const { data, total, totalPages } = await getWithTotal<WPCourseItem[]>(
+      "/lp_course",
+      {
+        page: params.page ?? 1,
+        per_page: params.per_page ?? 12,
+        search: params.search,
+        course_category: params.category,
+        orderby: "date",
+        order: "desc",
+        _embed: "wp:featuredmedia,wp:term",
+      },
+    );
 
-  listTrendingCourses: () => get<Course[]>("/courses/trending"),
+    const pagination = {
+      current_page: params.page ?? 1,
+      last_page: totalPages || 1,
+      per_page: params.per_page ?? 12,
+      total,
+    };
 
-  searchCourses: (q: string) =>
-    get<{ results: { id: number; slug: string; title: string }[] }>(
-      `/search?q=${encodeURIComponent(q)}`,
-    ).then((r) => r.results),
+    return {
+      data: data.map(mapCourse),
+      ...pagination,
+      meta: pagination,
+    } satisfies PaginatedCourses;
+  },
 
-  getCategoryCourses: (slug: string) =>
-    get<{ category: Category; courses: Course[] }>(`/categories/${slug}`),
+  listTrendingCourses: async () => {
+    const items = await get<WPCourseItem[]>("/lp_course", {
+      per_page: 5,
+      orderby: "date",
+      order: "desc",
+      _embed: "wp:featuredmedia,wp:term",
+    });
+    return items.map(mapCourse);
+  },
+
+  searchCourses: async (q: string) => {
+    const results = await get<{ id: number; slug: string; title: string }[]>(
+      "/search",
+      { search: q, per_page: 10, subtype: "lp_course" },
+    );
+    return results;
+  },
+
+  getCategoryCourses: async (slug: string) => {
+    const categories = await get<WPCategoryItem[]>("/course_category", {
+      slug,
+      per_page: 1,
+    });
+    const category = categories[0];
+    if (!category) {
+      return { category: null, courses: [] };
+    }
+
+    const items = await get<WPCourseItem[]>("/lp_course", {
+      course_category: category.id,
+      per_page: 12,
+      _embed: "wp:featuredmedia,wp:term",
+    });
+
+    return {
+      category: mapCategory(category),
+      courses: items.map(mapCourse),
+    };
+  },
 
   registerForCourse: (payload: {
     firstName: string;
@@ -176,13 +387,9 @@ export const api = {
     courseName: string;
     courseCategory: string;
   }): Promise<string> =>
-    post<{ success: boolean; message: string }>("/registrations", payload).then(
-      (json) => {
-        if (!json.success)
-          throw new Error(
-            json.message ?? "Registration failed. Please try again.",
-          );
-        return json.message;
-      },
+    Promise.reject(
+      new Error(
+        "Course registration is not available through the current Cynet API endpoint.",
+      ),
     ),
 };

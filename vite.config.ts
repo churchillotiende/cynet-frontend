@@ -6,18 +6,17 @@ import react from '@vitejs/plugin-react-swc'
 import path from 'path'
 import sitemap from 'vite-plugin-sitemap'
 
-const API_BASE = "https://api-v2.bluestroninstitute.com/api/v1";
+const API_BASE = "https://cyneteastafrica.com/wp-json/wp/v2";
 
 const getCourseRoutes = async () => {
   try {
-    const res = await fetch(`${API_BASE}/courses?per_page=1000`)
-    const json = (await res.json()) as { data?: unknown }
-    const courses = json?.data
+    const res = await fetch(`${API_BASE}/lp_course?per_page=100&_embed=wp:term`)
+    const courses = (await res.json()) as Array<{ slug: string; seo_robots_noindex?: boolean }>
     if (!Array.isArray(courses)) {
       console.warn('Expected array of courses but got:', typeof courses)
       return []
     }
-    return (courses as Array<{ slug: string; seo_robots_noindex?: boolean }>)
+    return courses
       .filter((course) => !course.seo_robots_noindex)
       .map((course) => `/course/${course.slug}`)
   } catch (e) {
@@ -27,7 +26,7 @@ const getCourseRoutes = async () => {
 }
 const getCategoryRoutes = async () => {
   try {
-    const res = await fetch(`${API_BASE}/categories`)
+    const res = await fetch(`${API_BASE}/course_category?per_page=100&hide_empty=true`)
     const categories = await res.json()
     if (!Array.isArray(categories)) {
       console.warn('Expected array of categories but got:', typeof categories)
@@ -61,7 +60,7 @@ export default defineConfig(async () => {
         },
       }),
       sitemap({
-        hostname: 'https://bluestroninstitute.com',
+        hostname: 'https://cyneteastafrica.com',
         outDir: 'dist/client',
         dynamicRoutes: [
           '/',
